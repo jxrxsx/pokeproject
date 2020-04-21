@@ -4,7 +4,7 @@ const app = express();
 
 app.get('/', (req, res) => {
     res.json({ 
-        "nome": "jonzera b.o da ZL",
+        "nome": "jonzera",
         "idade": 22,
         "skills": {
             "web": ["nodejs", "ASP.NET", "SpringBoot"]
