@@ -15,4 +15,6 @@ routes.delete('/pokemons/:id', PokemonController.delete);
 
 routes.put('/pokemons/:id', PokemonController.update);
 
+routes.get('/seed', PokemonController.seed);
+
 module.exports = routes;
