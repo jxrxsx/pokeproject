@@ -1,0 +1,15 @@
+https://pokeapi.co/api/v2/pokemon/1/ -> retorna um objeto que contém todas as infos do pokemon id = 1 (bulbassauro)
+
+
+json hierarchy
+
+id  -> json.id
+
+name -> json.name
+
+icone p/ ranking -> json.sprites.front_default (.png)
+
+tipos [array] -> json.types
+
+
+

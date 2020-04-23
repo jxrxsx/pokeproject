@@ -4,47 +4,6 @@
     * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-freelancer/blob/master/LICENSE)
     */
 
-    $(document).ready(function(){
-
-      const pokemonImg1 = $('#poke1');
-      const pokemonImg2 = $('#poke2');
-      var count = 0;
-      const min = 1;
-      const max = 152;
-
-      renderRandomPokemons();
-
-      function renderRandomPokemons(){
-        
-        const baseUrl = 'https://pokeres.bastionbot.org/images/pokemon/';
-        
-        pokemonImg1.attr('src', baseUrl+getRandomPokemon()+'.png');
-        pokemonImg2.attr('src', baseUrl+getRandomPokemon()+'.png');
-        
-      }
-
-      function atualizaContador(){
-        count += 1;
-        localStorage.setItem("contador", count);
-      }
-
-      function getRandomPokemon(){
-        return (Math.round(Math.random() * (max - min) + min)).toString();
-      }
-
-      $('#btnRecarregar').click(async () =>{
-        pokemonImg1.src = await renderRandomPokemons();
-        pokemonImg2.src = await renderRandomPokemons();
-      });
-
-      $("#poke1, #poke2").on('click', function() {
-        atualizaContador();
-        renderRandomPokemons();
-      });
-
-    });
-
-    
     (function($) {
 
 
