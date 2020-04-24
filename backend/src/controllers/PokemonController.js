@@ -3,62 +3,63 @@ const axios = require('axios');
 
 const Pokemon = mongoose.model('Pokemon');
 
+mongoose.set('useFindAndModify', false);
+
 module.exports = {
-    async index(req, res) {
+    async index (req, res) {
         const pokemon = await Pokemon.find();
 
         return res.json(pokemon);
     },    
 
-    async store(req, res) {
+    async store (req, res) {
         const pokemon = await Pokemon.create(req.body);
 
         return res.json(pokemon);
     },
 
-    async show(req, res) {
-        const pokemon = await Pokemon.findById(req.params.id);
+    async show (req, res) {
+        const pokemon = await Pokemon.find({ pokeId: req.params.id });
 
         return res.json(pokemon);
     },
 
-    async update(req, res) {
-        const pokemon = await Pokemon.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    async update (req, res) {
+        const pokemon = await Pokemon.findOneAndUpdate({ pokeId: req.params.id }, req.body, { new: true });
         
         return res.json(pokemon);
     },
 
-    async delete(req, res) {
-        const pokemon = await Pokemon.findByIdAndDelete(req.params.id);
+    async delete (req, res) {
+        const pokemon = await Pokemon.findOneAndDelete({ pokeId: req.params.id });
 
         return res.send();
     },
 
     async seed(req, res){
-        //const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=151');
-        //const pokemons = response.data.results;
-        const limit = 151;
-        var id, name, icon, types, votes;
-        //for(var i = 0; i < limit; i++){
-            const pokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon/1`);
-            
-           //var schema = new mongoose.Schema({ name: 'string', size: 'string' });
-            
-            const Pokemon = mongoose.model('Pokemon', schema);
-            id = pokemon.data.id;
+        const QTD_POKEMONS = 152;
+        var pokeId, name, icon, votes;
+        var types = [];
+        var jsonPokemons = [];
+        for(var i = 1; i < QTD_POKEMONS; i++){
+            var pokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
+            pokeId = pokemon.data.id;
             name = pokemon.data.name;
             icon = pokemon.data.sprites.front_default;
+            types = [];
             
-            pokemon.data.types.forEach(t => {
-                types.push(t.type.name);    
+            pokemon.data.types.forEach(prop => {
+                types.push(prop.type.name);    
             }); 
 
             votes = 0;
 
-            //const result = await Pokemon.create({ pokeId, name, icon: sprites.front_default, types: types.type.name, votes: 0  });
-        //}
+            jsonPokemons.push({ pokeId, name, icon, types, votes });
 
-        return res.send(pokemon.data);
+            const result = await Pokemon.create({ pokeId, name, icon, types, votes });
+        }
+
+        return res.json(jsonPokemons);
     }
 
 };
