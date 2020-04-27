@@ -25,7 +25,9 @@ module.exports = {
     },
 
     async update (req, res) {
-        const pokemon = await Pokemon.findOneAndUpdate({ pokeId: req.params.id }, req.body, { new: true });
+        console.log(req.params.id);
+
+        const pokemon = await Pokemon.findOneAndUpdate({ pokeId: req.params.id }, { $inc: { votes: 1 } }, { new: true });
         
         return res.json(pokemon);
     },

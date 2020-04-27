@@ -586,6 +586,10 @@ pre code {
   .container-md, .container-sm, .container {
     max-width: 720px;
   }
+
+  #btnRecarregarMobile {
+    display: none;
+  }
 }
 @media (min-width: 992px) {
   .container-lg, .container-md, .container-sm, .container {
