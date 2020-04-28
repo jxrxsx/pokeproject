@@ -17,4 +17,6 @@ routes.put('/pokemons/:id', PokemonController.update);
 
 routes.get('/seed', PokemonController.seed);
 
+routes.get('/ranking', PokemonController.ranking);
+
 module.exports = routes;

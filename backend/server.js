@@ -13,7 +13,7 @@ mongoose.connect("mongodb://localhost:27017/pokedb", { useNewUrlParser: true, us
 
 requireDir('./src/models');
 
-var Schema = mongoose.Schema;
+// var Schema = mongoose.Schema;
 
 //const Pokemon = mongoose.model('Pokemon');
 

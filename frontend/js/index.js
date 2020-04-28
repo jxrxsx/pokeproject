@@ -5,7 +5,8 @@ const pokemonImg1 = $('#poke1Img');
 const pokemonImg2 = $('#poke2Img');
 
 const BASE_IMG_URL = 'https://pokeres.bastionbot.org/images/pokemon';
-const BASE_API_URL = 'http://localhost:3000/api/pokemons';
+const BASE_API_URL = 'http://localhost:3000/api';
+const CONTROLLER = 'pokemons';
 
 var pokemonsData = [];
 
@@ -44,7 +45,7 @@ function getPokemonsData () {
   // BUSCA DADOS DO POKEMON 1
   $.ajax({
     type: 'GET',
-    url: `${BASE_API_URL}/${POKE_1_ID}`,
+    url: `${BASE_API_URL}/${CONTROLLER}/${POKE_1_ID}`,
     dataType: 'json',
     success: function (pokemon) {
 
@@ -66,7 +67,7 @@ function getPokemonsData () {
       // BUSCA DADOS DO POKEMON 2
       $.ajax({
         type: 'GET',
-        url: `${BASE_API_URL}/${POKE_2_ID}`,
+        url: `${BASE_API_URL}/${CONTROLLER}/${POKE_2_ID}`,
         dataType: 'json',
         success: function (pokemon) {
 
@@ -120,7 +121,7 @@ async function registerVote (votedPokemon) {
 
   await $.ajax({ 
     type: 'PUT',
-    url: `${BASE_API_URL}/${votedPokemon.pokeId}`,
+    url: `${BASE_API_URL}/${CONTROLLER}/${votedPokemon.pokeId}`,
     dataType: 'json',
     data: votedPokemon,
     success: function (response) {

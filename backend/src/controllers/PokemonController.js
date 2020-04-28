@@ -38,6 +38,16 @@ module.exports = {
         return res.send();
     },
 
+    async ranking (req, res) {
+
+        var limit = 20;
+        const skip = (parseInt(req.query.page) - 1) * (limit);   
+
+        const pokemon = await Pokemon.find({ }).sort({ votes: -1 }).limit( limit ).skip( skip );
+
+        return res.json(pokemon);
+    },
+
     async seed(req, res){
         const QTD_POKEMONS = 152;
         var pokeId, name, icon, votes;
