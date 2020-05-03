@@ -13,3 +13,7 @@ tipos [array] -> json.types
 
 
 
+
+no mobile, deixar menu collapsed
+	opção de recarregar pokemons
+	opção de ver o ranking

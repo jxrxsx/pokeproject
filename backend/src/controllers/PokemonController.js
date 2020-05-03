@@ -28,6 +28,8 @@ module.exports = {
         console.log(req.params.id);
 
         const pokemon = await Pokemon.findOneAndUpdate({ pokeId: req.params.id }, { $inc: { votes: 1 } }, { new: true });
+        console.log('atualizou os votos do pokemon' + req.params.id);
+        console.log(pokemon);
         
         return res.json(pokemon);
     },
@@ -40,7 +42,7 @@ module.exports = {
 
     async ranking (req, res) {
 
-        var limit = 20;
+        var limit = 26;
         const skip = (parseInt(req.query.page) - 1) * (limit);   
 
         const pokemon = await Pokemon.find({ }).sort({ votes: -1 }).limit( limit ).skip( skip );

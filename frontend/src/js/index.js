@@ -1,11 +1,16 @@
+const NODE_API_DEV_ENV = 'http://localhost:3000/api'; 
+const NODE_API_PROD_ENV = 'https://pokerinha.herokuapp.com/api';
+
+const IMG_API_DEFAULT_ENV = 'https://pokeres.bastionbot.org/images/pokemon';
+
 const MIN = 1;
 const MAX = 151;
 
 const pokemonImg1 = $('#poke1Img');
 const pokemonImg2 = $('#poke2Img');
 
-const BASE_IMG_URL = 'https://pokeres.bastionbot.org/images/pokemon';
-const BASE_API_URL = 'http://localhost:3000/api';
+const BASE_IMG_URL = IMG_API_DEFAULT_ENV;
+const BASE_API_URL = NODE_API_PROD_ENV;
 const CONTROLLER = 'pokemons';
 
 var pokemonsData = [];
@@ -13,21 +18,20 @@ var pokemonsData = [];
 $(document).ready(function () {
 
   getPokemonsData();
-
   
-  $('#btnRecarregar, #btnRecarregarMobile').click(getPokemonsData);
+  $('#btnRecarregar').click(getPokemonsData);
 
   $('#poke1Img').click( () => {
     // SE VOTAR NO POKEMON DA ESQUERDA, RECUPERAR OS DADOS DESSE POKEMON E CHAMAR A FUNÇÃO QUE FAZ O UPDATE DOS VOTOS
-    console.log('pokemon votado: ');
-    console.log(pokemonsData[0]);
+    //console.log('pokemon votado: ');
+    //console.log(pokemonsData[0]);
     registerVote(pokemonsData[0]);
   });
 
   $('#poke2Img').click( () => {
     // SE VOTAR NO POKEMON DA ESQUERDA, RECUPERAR OS DADOS DESSE POKEMON E CHAMAR A FUNÇÃO QUE FAZ O UPDATE DOS VOTOS
-    console.log('pokemon votado: ');
-    console.log(pokemonsData[1]);
+    //console.log('pokemon votado: ');
+    //console.log(pokemonsData[1]);
     registerVote(pokemonsData[1]);
 
   });
@@ -51,7 +55,7 @@ function getPokemonsData () {
 
       pokemonsData = [];
       pokemonsData.push(pokemon[0]);
-      // console.log(pokemon);           // descomentar para ver qual é o pokemon
+      // //console.log(pokemon);           // descomentar para ver qual é o pokemon
 
       // SETA INFOS POKEMON 1 NO HTML
       $('#namePoke1').text(pokemon[0].name);
@@ -72,7 +76,7 @@ function getPokemonsData () {
         success: function (pokemon) {
 
           pokemonsData.push(pokemon[0]);
-          // console.log(pokemon);      // descomentar para ver qual é o pokemon
+          // //console.log(pokemon);      // descomentar para ver qual é o pokemon
 
           // SETA INFOS POKEMON 1 NO HTML
           $('#namePoke2').text(pokemon[0].name);
@@ -90,7 +94,7 @@ function getPokemonsData () {
     }
   });
 
-  //console.log(pokemonsData);
+  ////console.log(pokemonsData);
 }
 
 function renderPokemonsImages(POKE_1_ID, POKE_2_ID) {
@@ -102,12 +106,12 @@ function renderPokemonsImages(POKE_1_ID, POKE_2_ID) {
 function getRandomPokemonId () {
   ids = [];
 
-  ids.push((Math.round(Math.random() * (MAX - MIN) + MIN)).toString());
-  ids.push((Math.round(Math.random() * (MAX - MIN) + MIN)).toString());
+  ids.push((Math.floor(Math.random() * (MAX - MIN + 1) + MIN)).toString());
+  ids.push((Math.floor(Math.random() * (MAX - MIN + 1) + MIN)).toString());
 
   while( ids[0] === ids[1] ) {
-    console.log(` ids sorteados são iguais: ${ids[0]} e ${ids[1]}. sorteando de novo`);
-    ids[1] = (Math.round(Math.random() * (MAX - MIN) + MIN)).toString();
+    //console.log(` ids sorteados são iguais: ${ids[0]} e ${ids[1]}. sorteando de novo`);
+    ids[1] = (Math.floor(Math.random() * (MAX - MIN + 1) + MIN)).toString();
   }
   
   return ids;
@@ -115,9 +119,9 @@ function getRandomPokemonId () {
 
 async function registerVote (votedPokemon) {
 
-  console.log('função registerVote()');
+  //console.log('função registerVote()');
 
-  console.log(votedPokemon);
+  //console.log(votedPokemon);
 
   await $.ajax({ 
     type: 'PUT',
@@ -125,7 +129,7 @@ async function registerVote (votedPokemon) {
     dataType: 'json',
     data: votedPokemon,
     success: function (response) {
-      console.log('response: ' +JSON.stringify(response));
+      //console.log('response: ' +JSON.stringify(response));
           
       // JÁ CHAMA MAIS DOIS POKEMONS PRA RINHA
       getPokemonsData();
