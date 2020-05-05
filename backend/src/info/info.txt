@@ -11,9 +11,9 @@ icone p/ ranking -> json.sprites.front_default (.png)
 
 tipos [array] -> json.types
 
+========================================================================================
 
-
-
-no mobile, deixar menu collapsed
-	opção de recarregar pokemons
-	opção de ver o ranking
+pra versão 2.0
+	-> fazer método no controller que retorna os dados dos 2 pokemons na mesma requisição
+		-> maior velocidade e menor consumo de banda
+		

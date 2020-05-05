@@ -15,7 +15,7 @@ module.exports = {
     async store (req, res) {
         const pokemon = await Pokemon.create(req.body);
 
-        return res.json(pokemon);
+        return res.send();
     },
 
     async show (req, res) {

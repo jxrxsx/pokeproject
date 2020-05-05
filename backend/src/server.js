@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 // Iniciando o DB
-mongoose.connect(process.env.PORT || "mongodb://localhost:27017/pokedb", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/pokedb', { useNewUrlParser: true, useUnifiedTopology: true });
 
 requireDir('./models');
 
